@@ -1,3 +1,6 @@
+# JSON BIN key
+Add the JSON BIN key from your account using the environment variable `REACT_APP_JSON_BIN_KEY`. A key can be obtained by creating an account on [jsonbin.io](https://jsonbin.io/). Note, you may need to escape some of your key characters (such as $).
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

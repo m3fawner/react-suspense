@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { Suspense, useState } from 'react';
+import { ChakraProvider, Container, Flex, SkeletonText, Spinner, Center } from '@chakra-ui/react';
+import UserList from './UserList';
+import Comments from './Comments';
 
-function App() {
+const App = () => {
+  const [user, setUser] = useState(null);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ChakraProvider>
+      <Container maxW="2xl" mt="4">
+        <Suspense fallback={(
+          <Center w="2xl" h="2xl">
+            <Spinner />
+          </Center>
+        )}>
+          <Flex>
+            <UserList mr="4" flexBasis="25%" onUserSelect={setUser} />
+            <Suspense fallback={(
+              <Center w="100%" h="100%" mt="4">
+                <SkeletonText noOfLines={4} minW="100%" />
+              </Center>
+            )}>
+              <Comments flexBasis="75%" user={user} />
+            </Suspense>
+          </Flex>
+        </Suspense>
+      </Container>
+    </ChakraProvider>
   );
-}
-
+};
 export default App;
